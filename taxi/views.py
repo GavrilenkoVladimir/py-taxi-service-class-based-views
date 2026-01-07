@@ -19,6 +19,7 @@ def index(request):
 class DriversView(generic.ListView):
     model = Driver
     paginate_by = 5
+    queryset = Driver.objects.prefetch_related("cars")
 
 
 class DriversDetailView(generic.DetailView):
@@ -28,6 +29,7 @@ class DriversDetailView(generic.DetailView):
 class CarsView(generic.ListView):
     model = Car
     paginate_by = 5
+    queryset = Car.objects.prefetch_related("drivers")
 
 
 class CarsDetailView(generic.DetailView):
@@ -37,3 +39,4 @@ class CarsDetailView(generic.DetailView):
 class ManufacturersView(generic.ListView):
     model = Manufacturer
     paginate_by = 5
+    queryset = Manufacturer.objects.all().order_by("name")
